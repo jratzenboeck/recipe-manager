@@ -49,7 +49,10 @@
                 </div>
                 <div class="mb-4">
                     <template x-for="ingredient in ingredientsToFilter">
-                        <span class="bg-blue-100 text-blue-800 py-1 px-2 rounded-full text-xs mr-2" x-text="ingredient"></span>
+                        <span class="bg-blue-100 text-blue-800 py-1 px-2 rounded-full text-xs mr-2">
+                            <span class="text-blue-800 mr-2 cursor-pointer" @click="removeIngredient(ingredient)">x</span>
+                            <span x-text="ingredient"></span>
+                        </span>
                     </template>
                 </div>
             </div>
