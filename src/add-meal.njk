@@ -1,0 +1,50 @@
+---
+layout: layout.njk
+---
+
+<body class="bg-gray-100 flex flex-col items-center p-4">
+
+    <h1 class="text-2xl font-bold text-center mb-8">Rezept hinzufügen</h1>
+
+    <div class="max-w-lg w-full p-4 bg-white shadow-md rounded-lg">
+        <form x-data="{ ingredients: [], ingredientName: '', ingredientQuantity: '' }" @submit.prevent="">
+            <!-- Meal Name -->
+            <div class="mb-4">
+                <label class="block text-lg mb-2" for="mealName">Name des Gerichts</label>
+                <input type="text" id="mealName" placeholder="Name des Gerichts" class="border border-gray-300 rounded p-2 w-full" required />
+            </div>
+
+            <!-- Ingredients Section -->
+            <div class="mb-4 flex gap-2">
+                <input x-model="ingredientName" type="text" placeholder="Name der Zutat" class="border border-gray-300 rounded p-2 flex-grow" required />
+                <input x-model="ingredientQuantity" type="text" placeholder="Menge" class="border border-gray-300 rounded p-2 w-1/4" required />
+                  <button 
+                    class="bg-blue-500 text-white rounded p-2 flex-grow" 
+                    @click="ingredients.push({ name: ingredientName, quantity: ingredientQuantity }); ingredientName = ''; ingredientQuantity = '';">
+                      Hinzufügen
+                  </button>
+            </div>
+            
+            <!-- Display Ingredients as Pills -->
+            <div class="mb-4">
+                <template x-for="ingredient in ingredients" :key="ingredient.name">
+                    <span class="bg-blue-100 text-blue-800 py-1 px-2 rounded-full text-xs mr-2" x-text="`${ingredient.name} - ${ingredient.quantity}`"></span>
+                </template>
+            </div>
+
+            <!-- Recipe Section -->
+            <div class="mb-4">
+                <label class="block text-lg mb-2" for="recipe">Zubereitung</label>
+                <textarea id="recipe" rows="4" placeholder="Zubereitung eingeben" class="border border-gray-300 rounded p-2 w-full" required></textarea>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-end space-x-2">
+                <a href="/" class="bg-gray-300 rounded p-2">Cancel</a>
+                <button type="submit" class="bg-blue-600 text-white rounded p-2">Save</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

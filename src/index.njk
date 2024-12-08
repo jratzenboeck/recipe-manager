@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My 11ty Project</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="scripts/index.js"></script>
-</head>
+---
+layout: layout.njk
+---
 
 <body class="bg-gray-100 flex flex-col items-center p-4" x-data="{ open: false, filterIngredients: false }">
 
@@ -44,13 +37,13 @@
             </div>
             <div x-show="filterIngredients" x-transition x-data="ingredientsFilterSection">
                 <div class="flex items-center mb-4">
-                    <input type="text" placeholder="Name der Zutat" class="border border-gray-300 rounded p-2 flex-grow" x-model="ingredient"/>
+                    <input type="text" placeholder="Name der Zutat" class="border border-gray-300 rounded p-2 flex-grow" x-model="ingredient" @keyup.enter="addIngredient(ingredient)"/>
                     <button class="ml-2 bg-blue-500 text-white rounded p-2" @click="addIngredient(ingredient)">Hinzufügen</button>
                 </div>
                 <div class="mb-4">
                     <template x-for="ingredient in ingredientsToFilter">
                         <span class="bg-blue-100 text-blue-800 py-1 px-2 rounded-full text-xs mr-2">
-                            <span class="text-blue-800 mr-2 cursor-pointer" @click="removeIngredient(ingredient)">x</span>
+                            <span class="text-blue-800 cursor-pointer p-1" @click="removeIngredient(ingredient)">x</span>
                             <span x-text="ingredient"></span>
                         </span>
                     </template>
@@ -65,7 +58,7 @@
 
     <div class="max-w-lg w-full p-4 bg-white shadow-md rounded-lg">
         <h2 class="text-xl font-semibold mb-4">Neues Gericht</h2>
-        <button class="bg-blue-600 text-white rounded p-2">Starten</button>
+        <a href="/add-meal" class="bg-blue-600 text-white rounded p-2">Starten</a>
     </div>
 
 </body>
